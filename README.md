@@ -4,4 +4,4 @@ Servidor de aplicaciones web basadas en Java.
 ```
 java -jar webappserver-x.x.jar -war archivo.war -port 1234
 ```
-donde el parámetro *-jar* especifica el archivo .war que contiene la aplicación web, y *-port* el puerto TCP de escucha.
+donde el parámetro *-war* especifica el archivo .war que contiene la aplicación web, y *-port* el puerto TCP de escucha.

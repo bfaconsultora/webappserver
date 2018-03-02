@@ -52,9 +52,6 @@ public class WebAppServer {
 		classlist.addBefore("org.eclipse.jetty.webapp.JettyWebXmlConfiguration", 
 			"org.eclipse.jetty.annotations.AnnotationConfiguration" );
 		
-		webapp.setAttribute("org.eclipse.jetty.server.webapp.ContainerIncludeJarPattern",
-			".*/[^/]*servlet-api-[^/]*\\.jar$|.*/javax.servlet.jsp.jstl-.*\\.jar$|.*/[^/]*taglibs.*\\.jar$" );
-		
 		server.setHandler(webapp);
 		
 		server.start();

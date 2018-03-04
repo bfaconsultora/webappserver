@@ -15,14 +15,4 @@ public class SimpleServlet extends HttpServlet {
 			throws ServletException, IOException {
 		response.getWriter().println("Hola Mundo! Esto es un servlet");
 	}
-	
-	@Override
-	public void init() throws ServletException {
-		System.out.println("Servlet " + this.getServletName() + " has started");
-	}
-	
-	@Override
-	public void destroy() {
-		System.out.println("Servlet " + this.getServletName() + " has stopped");
-	}
 }

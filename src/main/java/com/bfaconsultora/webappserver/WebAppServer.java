@@ -12,8 +12,12 @@ public class WebAppServer {
 		Options options = new Options();
 		
 		Option warfileOption = new Option("war", true, "war file");
-		warfileOption.setRequired(true);
+		warfileOption.setRequired(false);
 		options.addOption(warfileOption);
+		
+		Option dirOption = new Option("dir", true, "webapp root directory");
+		dirOption.setRequired(false);
+		options.addOption(dirOption);
 		
 		Option portOption = new Option("port", true, "port");
 		portOption.setRequired(false);
@@ -28,25 +32,34 @@ public class WebAppServer {
 		} catch (ParseException e) {
 			System.out.println(e.getMessage());
 			formatter.printHelp("java -jar webappserver-1.0.jar", options);
-
+			
 			System.exit(1);
 			return;
 		}
 		
 		int port;
-		if (cmd.hasOption("port")) {
+		if(cmd.hasOption("port")) {
 			port = Integer.parseInt(cmd.getOptionValue("port"));
 		} else {
 			port = 8080;
 		}
-			
-		String warfile = cmd.getOptionValue("war");
 		
 		Server server = new Server(port);
 		
 		WebAppContext webapp = new WebAppContext();
 		webapp.setContextPath("/");
-		webapp.setWar(warfile);
+		
+		if(cmd.hasOption("war")) {
+			webapp.setWar(cmd.getOptionValue("war"));
+		} else if(cmd.hasOption("dir")) {
+			webapp.setResourceBase(cmd.getOptionValue("dir"));
+			webapp.setParentLoaderPriority(true);
+		} else {
+			formatter.printHelp("java -jar webappserver-1.0.jar", options);
+			
+			System.exit(1);
+			return;
+		}
 		
 		Configuration.ClassList classlist = Configuration.ClassList.setServerDefault(server);
 		classlist.addBefore("org.eclipse.jetty.webapp.JettyWebXmlConfiguration", 

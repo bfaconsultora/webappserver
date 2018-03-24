@@ -31,7 +31,7 @@ public class WebAppServer {
 			cmd = parser.parse(options, args);
 		} catch (ParseException e) {
 			System.out.println(e.getMessage());
-			formatter.printHelp("java -jar webappserver-1.0.jar", options);
+			formatter.printHelp("java -jar webappserver-1.1.jar", options);
 			
 			System.exit(1);
 			return;
@@ -55,7 +55,7 @@ public class WebAppServer {
 			webapp.setResourceBase(cmd.getOptionValue("dir"));
 			webapp.setParentLoaderPriority(true);
 		} else {
-			formatter.printHelp("java -jar webappserver-1.0.jar", options);
+			formatter.printHelp("java -jar webappserver-1.1.jar", options);
 			
 			System.exit(1);
 			return;

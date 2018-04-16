@@ -5,7 +5,7 @@ Servidor de aplicaciones web basadas en Java.
 v1.1: Ahora se puede publicar una aplicación web directamente desde el directorio raiz descomprimido.
 
 ## Descarga
-[Última versión estable](http://artifactory.bfaconsultora.com/artifactory/local/webappserver-1.1.jar)
+[Última versión estable](http://artifactory.bfaconsultora.com/artifactory/local/com/bfaconsultora/webappserver/1.1/webappserver-1.1.jar)
 
 ### Modo de Uso
 ```

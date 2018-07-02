@@ -48,6 +48,7 @@ public class WebAppServer {
 		}
 
 		Server server = new Server(port);
+		server.setAttribute("org.eclipse.jetty.server.Request.maxFormContentSize", -1);
 
 		WebAppContext webapp = new WebAppContext();
 		webapp.setContextPath("/");

@@ -11,7 +11,10 @@ import org.eclipse.jetty.webapp.Configuration;
 import org.apache.commons.cli.*;
 
 public class WebAppServer {
+	private static String version = "1.3.1";
+	
 	public static void main(String[] args) throws Exception {
+		System.out.println("\nwebappserver version " + version + " starting...\n");
 		Options options = new Options();
 
 		Option warfileOption = new Option("war", true, "war file");

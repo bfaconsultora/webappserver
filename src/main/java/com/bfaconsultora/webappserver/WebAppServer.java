@@ -1,5 +1,7 @@
 package com.bfaconsultora.webappserver;
 
+import java.util.Properties;
+
 import org.eclipse.jetty.server.Server;
 import org.eclipse.jetty.servlet.ServletHandler;
 import org.eclipse.jetty.servlet.FilterHolder;
@@ -11,10 +13,11 @@ import org.eclipse.jetty.webapp.Configuration;
 import org.apache.commons.cli.*;
 
 public class WebAppServer {
-	private static String version = "1.3.1";
-	
 	public static void main(String[] args) throws Exception {
-		System.out.println("\nwebappserver version " + version + " starting...\n");
+		final Properties properties = new Properties();
+		properties.load(WebAppServer.class.getResourceAsStream("/project.properties"));
+
+		System.out.println("\nwebappserver version " + properties.getProperty("version") + " starting...\n");
 		Options options = new Options();
 
 		Option warfileOption = new Option("war", true, "war file");
@@ -37,7 +40,7 @@ public class WebAppServer {
 			cmd = parser.parse(options, args);
 		} catch (ParseException e) {
 			System.out.println(e.getMessage());
-			formatter.printHelp("java -jar webappserver-1.1.jar", options);
+			formatter.printHelp("webappserver", options);
 
 			System.exit(1);
 			return;

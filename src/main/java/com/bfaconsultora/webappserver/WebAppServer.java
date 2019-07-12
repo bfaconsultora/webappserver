@@ -3,9 +3,7 @@ package com.bfaconsultora.webappserver;
 import java.util.Properties;
 
 import org.eclipse.jetty.server.Server;
-import org.eclipse.jetty.servlet.ServletHandler;
 import org.eclipse.jetty.servlet.FilterHolder;
-import org.eclipse.jetty.servlet.FilterMapping;
 import org.eclipse.jetty.servlets.CrossOriginFilter;
 import org.eclipse.jetty.webapp.WebAppContext;
 import org.eclipse.jetty.webapp.Configuration;
@@ -65,7 +63,7 @@ public class WebAppServer {
 			webapp.setResourceBase(cmd.getOptionValue("dir"));
 			webapp.setParentLoaderPriority(true);
 		} else {
-			formatter.printHelp("java -jar webappserver-1.1.jar", options);
+			formatter.printHelp("java -jar webappserver.jar", options);
 
 			System.exit(1);
 			return;
@@ -87,6 +85,7 @@ public class WebAppServer {
 		server.setHandler(webapp);
 
 		server.start();
+
 		server.join();
     }
 }

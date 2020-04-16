@@ -6,6 +6,10 @@ v1.5.0: Software liberado bajo licencia [GNU/GPL v3](https://www.gnu.org/license
 
 v1.1: Ahora se puede publicar una aplicación web directamente desde el directorio raiz descomprimido.
 
+### Compilación
+```
+$ mvn clean compile package
+```
 
 ### Modo de Uso
 ```

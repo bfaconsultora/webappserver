@@ -15,6 +15,15 @@ public class WebAppServer {
 		final Properties properties = new Properties();
 		properties.load(WebAppServer.class.getResourceAsStream("/project.properties"));
 
+		System.out.println();
+		System.out.println("Basisty, Fuentes & Assoc.");
+		System.out.println("We turn your ideas into Code...");
+		System.out.println("http://www.basisty.com");
+		System.out.println("info@basisty.com");
+		System.out.println();
+		System.out.println("This is open source software and it comes with ABSOLUTELY NO WARRANTY.");
+		System.out.println("For licencing information please visit https://www.gnu.org/licenses/gpl-3.0.html");
+
 		System.out.println("\nwebappserver version " + properties.getProperty("version") + " starting...\n");
 		Options options = new Options();
 

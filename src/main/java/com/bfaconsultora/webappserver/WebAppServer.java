@@ -2,11 +2,12 @@ package com.bfaconsultora.webappserver;
 
 import java.util.Properties;
 
+import org.eclipse.jetty.server.Connector;
 import org.eclipse.jetty.server.Server;
+import org.eclipse.jetty.server.ServerConnector;
 import org.eclipse.jetty.servlet.FilterHolder;
 import org.eclipse.jetty.servlets.CrossOriginFilter;
 import org.eclipse.jetty.webapp.WebAppContext;
-import org.eclipse.jetty.webapp.Configuration;
 
 import org.apache.commons.cli.*;
 
@@ -39,6 +40,10 @@ public class WebAppServer {
 		portOption.setRequired(false);
 		options.addOption(portOption);
 
+		Option ipOption = new Option("ip", true, "ip address");
+		ipOption.setRequired(false);
+		options.addOption(ipOption);
+
 		CommandLineParser parser = new DefaultParser();
 		HelpFormatter formatter = new HelpFormatter();
 		CommandLine cmd;
@@ -60,8 +65,20 @@ public class WebAppServer {
 			port = 8080;
 		}
 
-		Server server = new Server(port);
+		String ip;
+		if(cmd.hasOption("ip")) {
+			ip = cmd.getOptionValue("ip");
+		} else {
+			ip = "0.0.0.0";
+		}
+
+		Server server = new Server();
 		server.setAttribute("org.eclipse.jetty.server.Request.maxFormContentSize", -1);
+                                     
+	    ServerConnector connector=new ServerConnector(server);
+    	connector.setPort(port);
+    	connector.setHost(ip);        
+    	server.setConnectors(new Connector[]{connector});
 
 		WebAppContext webapp = new WebAppContext();
 		webapp.setContextPath("/");
@@ -78,10 +95,6 @@ public class WebAppServer {
 			return;
 		}
 
-		Configuration.ClassList classlist = Configuration.ClassList.setServerDefault(server);
-		classlist.addBefore("org.eclipse.jetty.webapp.JettyWebXmlConfiguration",
-			"org.eclipse.jetty.annotations.AnnotationConfiguration" );
-
 		FilterHolder filterHolder = new FilterHolder(CrossOriginFilter.class);
 		
 		filterHolder.setInitParameter(CrossOriginFilter.ALLOWED_ORIGINS_PARAM, "*");
@@ -95,8 +108,9 @@ public class WebAppServer {
 		
 		filterHolder.setInitParameter (
 			CrossOriginFilter.ALLOWED_HEADERS_PARAM, 
-			"Authorization, X-Requested-With,Content-Type,Accept,Origin"
+			"*"
 		);
+
 		filterHolder.setName("cross-origin");
 
 		webapp.addFilter(filterHolder, "*", null);
